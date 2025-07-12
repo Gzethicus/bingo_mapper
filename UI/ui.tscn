@@ -1,0 +1,116 @@
+[gd_scene load_steps=14 format=3 uid="uid://1xclr4wwciao"]
+
+[ext_resource type="Script" path="res://UI/ui.gd" id="1_3e63n"]
+[ext_resource type="PackedScene" uid="uid://dl265nf553dut" path="res://UI/board.tscn" id="2_4ocby"]
+[ext_resource type="Texture2D" uid="uid://dioskxyjs6h43" path="res://graphics/pin.png" id="2_w85n6"]
+[ext_resource type="Texture2D" uid="uid://ck8onrc5wt2lt" path="res://graphics/bingoicons.png" id="4_sxkvb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_say57"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xyai8"]
+atlas = ExtResource("2_w85n6")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8cdis"]
+atlas = ExtResource("2_w85n6")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g6tg2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eejny"]
+bg_color = Color(0.0941176, 0.376471, 0.0941176, 0.6)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wiwol"]
+bg_color = Color(0.376471, 0.0941176, 0.0941176, 0.6)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fonc1"]
+bg_color = Color(0.0627451, 0.25098, 0.0627451, 0.6)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qjaqf"]
+bg_color = Color(0.25098, 0.0627451, 0.0627451, 0.6)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ncmr"]
+atlas = ExtResource("4_sxkvb")
+region = Rect2(8, 227, 16, 21)
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("1_3e63n")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -61.0
+offset_bottom = 40.0
+grow_horizontal = 0
+mouse_filter = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ImportButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_say57")
+text = "import"
+
+[node name="PinButton" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+toggle_mode = true
+texture_normal = SubResource("AtlasTexture_xyai8")
+texture_pressed = SubResource("AtlasTexture_8cdis")
+stretch_mode = 3
+
+[node name="Board" parent="VBoxContainer" instance=ExtResource("2_4ocby")]
+layout_mode = 2
+
+[node name="ExtraVistasButton" type="Button" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_g6tg2")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_eejny")
+theme_override_styles/hover = SubResource("StyleBoxFlat_wiwol")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fonc1")
+theme_override_styles/normal = SubResource("StyleBoxFlat_qjaqf")
+toggle_mode = true
+text = "extra"
+icon = SubResource("AtlasTexture_7ncmr")
+icon_alignment = 2
+
+[connection signal="mouse_entered" from="VBoxContainer" to="." method="_on_v_box_container_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer" to="." method="_on_v_box_container_mouse_exited"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ImportButton" to="." method="import_board"]
+[connection signal="toggled" from="VBoxContainer/HBoxContainer/PinButton" to="." method="pin"]
+[connection signal="auto_place" from="VBoxContainer/Board" to="." method="_auto_place"]
+[connection signal="slugcat_selected" from="VBoxContainer/Board" to="." method="_select_slugcat"]
+[connection signal="toggled" from="ExtraVistasButton" to="." method="_on_extra_vistas_button_toggled"]
