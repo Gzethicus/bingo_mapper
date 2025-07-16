@@ -2,7 +2,7 @@
 A little tool to help you get a visual representation of where you can complete goals to help you routing when playing [Rain World Bingo](https://github.com/Nacu0021/BingoMode).
 
 ## How to use
-Download the latest release and launch the executable, or alternatively clone this repository and build it using godot.<br>
+Download the [latest release](https://github.com/Gzethicus/bingo_mapper/releases/tag/v1.0) and launch the executable, or alternatively clone this repository and build it using godot.<br>
 Launch the executable, get a bingo board string in your clipboard from the game directly or from a fellow bingo player, and click the import button.<br>
 Importing a board sets the map for the appropriate slugcat, clears all previous markers, and auto-creates markers for some goals.
 
